@@ -10,7 +10,7 @@ PHP >= 5.4
 ## Usage
 
 ### Defining image types
-```
+```php
 <?php
 
 class MyImageType
@@ -24,7 +24,7 @@ class MyImageType
 ```
 
 ### Defining thumbnailer creation
-```
+```php
 <?php
 
 use iodev\Lib\Thumbnails\ThumbnailBuilder;
@@ -81,7 +81,7 @@ class MyImageFactory
 ```
 
 ### Defining image class
-```
+```php
 <?php
 
 use iodev\Lib\Thumbnails\Thumbnailer;
@@ -155,9 +155,7 @@ class MyImage
 ```
 
 ### Uploading
-```
-<?php
-
+```php
 $oldPath = "previous-generated-thumbnail-path.jpg";
 $thisContentId = 123;
 $formFileInputName = "imageFile";
@@ -176,9 +174,7 @@ $myThumbnailedImage = new MyImage($newPath);
 ```
 
 ### Updating
-```
-<?php
-
+```php
 $oldPath = "previous-generated-thumbnail-path.jpg";
 $thisContentId = 123;
 $overlayWatermarks = false;
@@ -194,9 +190,7 @@ $myThumbnailedImage = new MyImage($newPath);
 ```
 
 ### Using thumbnailed images
-```
-<?php
-
+```php
 $image = new MyImage("saved-thumbnailed-path.jpg");
 
 // original
