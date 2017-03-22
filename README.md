@@ -7,10 +7,12 @@ PHP >= 5.4
 - iodev\Lib\ImageTransform (https://github.com/io-developer/php-imagetransform)
 
 
-# Usage
+## Usage
 
-## Defining image types
+### Defining image types
 ```
+<?php
+
 class MyImageType
 {
     const ORIGINAL = "";
@@ -21,8 +23,10 @@ class MyImageType
 
 ```
 
-## Defining thumbnailer creation
+### Defining thumbnailer creation
 ```
+<?php
+
 use iodev\Lib\Thumbnails\ThumbnailBuilder;
 use iodev\Lib\Thumbnails\Thumbnailer;
 use iodev\Lib\Thumbnails\ThumbnailerBuilder;
@@ -76,8 +80,10 @@ class MyImageFactory
 }
 ```
 
-## Defining image class
+### Defining image class
 ```
+<?php
+
 use iodev\Lib\Thumbnails\Thumbnailer;
 
 class MyImage
@@ -148,8 +154,10 @@ class MyImage
 }
 ```
 
-## Uploading
+### Uploading
 ```
+<?php
+
 $oldPath = "previous-generated-thumbnail-path.jpg";
 $thisContentId = 123;
 $formFileInputName = "imageFile";
@@ -167,8 +175,10 @@ $myThumbnailedImage = new MyImage($newPath);
 
 ```
 
-## Updating
+### Updating
 ```
+<?php
+
 $oldPath = "previous-generated-thumbnail-path.jpg";
 $thisContentId = 123;
 $overlayWatermarks = false;
@@ -183,8 +193,10 @@ $myThumbnailedImage = new MyImage($newPath);
 
 ```
 
-## Using thumbnailed images
+### Using thumbnailed images
 ```
+<?php
+
 $image = new MyImage("saved-thumbnailed-path.jpg");
 
 // original
@@ -196,7 +208,7 @@ echo $image->toFullsizeUri();
 // wide watermarked
 echo $image->toWideUri();
 
-// square watermarked
+// square
 echo $image->toSquareUri();
 
 ```
