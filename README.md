@@ -172,6 +172,8 @@ $myThumbnailedImage = new MyImage($path);
 
 ### Updating
 ```php
+<?php
+
 $thisContentId = 123;
 $oldPath = "previous-generated-thumbnail-path.jpg";
 $areaSet = null;
