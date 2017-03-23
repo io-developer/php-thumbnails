@@ -44,7 +44,7 @@ class MyImageFactory
             ->addThumbnail(
                 ThumbnailBuilder::create()
                     ->name(MyImageType::ORIGINAL)
-                    ->size(2048, 2048)
+                    ->size(4096, 4096)
                     ->modeContain()
                     ->formatSource()
                     ->toThumbnail()
@@ -52,7 +52,7 @@ class MyImageFactory
             ->addThumbnail(
                 ThumbnailBuilder::create()
                     ->name(MyImageType::FULLSIZE)
-                    ->size(2048, 2048)
+                    ->size(4096, 4096)
                     ->modeContain()
                     ->formatSource()
                     ->watermarkAdaptive("watermark.png")
@@ -61,8 +61,8 @@ class MyImageFactory
             ->addThumbnail(
                 ThumbnailBuilder::create()
                     ->name(MyImageType::WIDE)
-                    ->size(730, 400)
-                    ->modeArea()
+                    ->size(1280, 720)
+                    ->modeCover()
                     ->formatJpeg(95)
                     ->watermarkAdaptive("watermark.png")
                     ->toThumbnail()
@@ -70,9 +70,9 @@ class MyImageFactory
             ->addThumbnail(
                 ThumbnailBuilder::create()
                     ->name(MyImageType::SQUARE)
-                    ->size(200, 200)
-                    ->modeArea()
-                    ->formatJpeg(95)
+                    ->size(150, 150)
+                    ->modeCover()
+                    ->formatPng()
                     ->toThumbnail()
             )
             ->toThumbnailer();
@@ -112,18 +112,16 @@ class MyImage
         $m->path = $path;
         return $m;
     }
-
-
+    
     /** @var string */
     public $path = "";
-    
     
     /**
      * @return string
      */
     public function toUri( $imageType="" )
     {
-        return self::thumbnailer()
+        return self::getThumbnailer()
             ->resolveLocationByName($this->path, $imageType);
     }
     
@@ -143,7 +141,6 @@ class MyImage
         return $this->toUri(MyImageType::WIDE);
     }
     
-    
     /**
      * @return string
      */
@@ -156,31 +153,32 @@ class MyImage
 
 ### Uploading
 ```php
-$oldPath = "previous-generated-thumbnail-path.jpg";
+<?php
+
 $thisContentId = 123;
 $formFileInputName = "imageFile";
+$areaSet = null;
 $overlayWatermarks = true;
 
 $thumbnailer = MyImage::getThumbnailer();
-$thumbnailer->deleteAllFiles($oldPath);
+$result = $thumbnailer->thumbnailFormInput($thisContentId, $formFileInputName, $areaSet, $overlayWatermarks);
 
-$result = $thumbnailer->thumbnailFormInput($thisContentId, $formFileInputName, null, $overlayWatermarks);
+// thumbnailed image path to store to somewhere
+$path = $result->getPrimaryPath();
 
-// thumbnailed image path to save
-$newPath = $result->getPrimaryPath();
-
-$myThumbnailedImage = new MyImage($newPath);
+$myThumbnailedImage = new MyImage($path);
 
 ```
 
 ### Updating
 ```php
-$oldPath = "previous-generated-thumbnail-path.jpg";
 $thisContentId = 123;
+$oldPath = "previous-generated-thumbnail-path.jpg";
+$areaSet = null;
 $overlayWatermarks = false;
 
 $thumbnailer = MyImage::getThumbnailer();
-$result = $thumbnailer->reThumbnailPath($thisContentId, $oldPath, null, $overlayWatermarks);
+$result = $thumbnailer->reThumbnailPath($thisContentId, $oldPath, $areaSet, $overlayWatermarks);
 
 // thumbnailed image path to save
 $newPath = $result->getPrimaryPath();
@@ -191,6 +189,8 @@ $myThumbnailedImage = new MyImage($newPath);
 
 ### Using thumbnailed images
 ```php
+<?php
+
 $image = new MyImage("saved-thumbnailed-path.jpg");
 
 // original
