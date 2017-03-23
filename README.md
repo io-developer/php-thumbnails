@@ -151,17 +151,18 @@ class MyImage
 }
 ```
 
-### Uploading
+### Uploading at form submitting
 ```php
 <?php
 
-$thisContentId = 123;
-$formFileInputName = "imageFile";
+// For example: you need to thumbnail main image of some article. So content ID it's article ID :)
+$contentId = 123;
+$inputName = "image-file-form-input-name";
 $areaSet = null;
 $overlayWatermarks = true;
 
 $thumbnailer = MyImage::getThumbnailer();
-$result = $thumbnailer->thumbnailFormInput($thisContentId, $formFileInputName, $areaSet, $overlayWatermarks);
+$result = $thumbnailer->thumbnailFormInput($contentId, $inputName, $areaSet, $overlayWatermarks);
 
 // thumbnailed image path to store to somewhere
 $path = $result->getPrimaryPath();
@@ -174,13 +175,13 @@ $myThumbnailedImage = new MyImage($path);
 ```php
 <?php
 
-$thisContentId = 123;
+$contentId = 123;
 $oldPath = "previous-generated-thumbnail-path.jpg";
 $areaSet = null;
 $overlayWatermarks = false;
 
 $thumbnailer = MyImage::getThumbnailer();
-$result = $thumbnailer->reThumbnailPath($thisContentId, $oldPath, $areaSet, $overlayWatermarks);
+$result = $thumbnailer->reThumbnailPath($contentId, $oldPath, $areaSet, $overlayWatermarks);
 
 // thumbnailed image path to save
 $newPath = $result->getPrimaryPath();
