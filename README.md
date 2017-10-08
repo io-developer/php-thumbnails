@@ -151,7 +151,7 @@ class MyImage
 }
 ```
 
-### Uploading at form submitting
+### Uploading on form submitting
 ```php
 <?php
 
