@@ -1,0 +1,36 @@
+{
+    "name": "io-developer/php-thumbnails",
+    "description": "Image thumbnails cropping and watermark overlaying",
+    "keywords": [
+        "php",
+        "image",
+        "images",
+        "thumbnail",
+        "thumbnails",
+        "thumbnailing",
+        "watermark",
+        "watermarker",
+        "crop",
+        "cropping"
+    ],
+    "type": "library",
+    "license": "MIT",
+    "version": "1.0.0",
+    "homepage": "https://github.com/io-developer/php-thumbnails",
+    "authors": [
+        {
+            "name": "Sergey Sedyshev",
+            "email": "i.o.developer@gmail.com",
+            "homepage": "https://github.com/io-developer"
+        }
+    ],
+    "require" : {
+        "php" : ">=5.4",
+        "io-developer/php-imagetransform": "^1.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Iodev\\": "src/Iodev/"
+        }
+    }
+}
